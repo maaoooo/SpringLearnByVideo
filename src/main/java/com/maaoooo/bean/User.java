@@ -1,0 +1,45 @@
+package com.maaoooo.bean;
+
+/**
+ * @author lzr
+ * @date 2020 05 10 21:58
+ * @description
+ */
+public class User {
+    private int id;
+    private String userName;
+    private String password;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User() {
+    }
+
+    public User(int id, String userName, String password) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+    }
+}

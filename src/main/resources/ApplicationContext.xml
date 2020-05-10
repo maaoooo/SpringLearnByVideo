@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd
+   http://www.springframework.org/schema/aop
+   http://www.springframework.org/schema/aop/spring-aop.xsd
+   http://www.springframework.org/schema/tx
+   http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!--目标对象-->
+    <bean id="userService" class="com.maaoooo.service.UserServiceImpl"></bean>
+    <!--通知对象-->
+    <bean id="MyAdvice" class="com.maaoooo.aop.MyAdvice"></bean>
+
+    <aop:config>
+        <!--切入点  expression 配置要增强的方法
+        public void com.maaoooo.service.UserServiceImpl.save()增强单个方法
+        * com.maaoooo.service.*Impl.*(..) 增强com.maaoooo.service.下的以Impl结尾的类的所有方法
+                    id 唯一标识-->
+        <aop:pointcut id="servicePC" expression="execution(* com.maaoooo.service.*Impl.*(..))"/>
+        <!--切面 通知加切入点-->
+        <aop:aspect ref="MyAdvice">
+            <!--通知类型-->
+            <aop:before method="before" pointcut-ref="servicePC"/>
+            <aop:after method="after" pointcut-ref="servicePC"/>
+            <aop:after-returning method="afterReturning" pointcut-ref="servicePC"/>
+            <aop:after-throwing method="afterThrowing" pointcut-ref="servicePC"/>
+            <aop:around method="around" pointcut-ref="servicePC"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
