@@ -19,7 +19,6 @@ public class Test {
         userService1.update();
         userService1.find();
     }
-    public void test(){
-
+    public void test() {
     }
 }
